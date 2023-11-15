@@ -1,5 +1,6 @@
-import { GetAllProducts } from '../api/api.js'
 import {
+	Products,
+	getAllProductsFromDatabase,
 	getCartItems,
 	getQtyFromCartItems,
 	setCartItems,
@@ -15,7 +16,7 @@ import CartScreen from './CartScreen.js'
  * @returns object
  */
 const updateSummary = async () => {
-	const products = await GetAllProducts()
+	
 	const cartItems = getCartItems()
 
 	let price = 0
@@ -23,14 +24,14 @@ const updateSummary = async () => {
 
 	if (Array.isArray(cartItems)) {
 		cartItems.forEach((cart) => {
-			const product = products.find((prod) => prod.id === cart.id)
+			const product = Products.find((prod) => prod._id === cart.id)
 			if (product) {
 				price += product.priceCents * cart.qty
 				ship += cart.shipping || 0
 			}
 		})
 	} else {
-		const product = products.find((prod) => prod.id === cartItems.id)
+		const product = Products.find((prod) => prod._id === cartItems.id)
 		price = product.priceCents
 	}
 
@@ -162,6 +163,7 @@ const CheckoutScreen = {
 	 * @returns
 	 */
 	render: async () => {
+		await getAllProductsFromDatabase()
 		const { price, subtotal, Shipping, tax, total } = await updateSummary()
 
 		return `

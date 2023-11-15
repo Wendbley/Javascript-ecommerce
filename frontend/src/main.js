@@ -7,6 +7,8 @@ import CheckoutScreen from './screens/CheckoutScreen.js'
 import ProductScreen from './screens/ProductScreen.js'
 import { parseRequestUrl, updateView } from './utils/index.js'
 import CheckoutHeader from './components/Checkout-header.js'
+import  RegisterScreen  from './screens/RegisterScreen.js'
+import  LoginScreen  from './screens/LoginScreen.js'
 
 const routes = {
 	'/': HomeScreen,
@@ -15,6 +17,9 @@ const routes = {
 	'/cart': CartScreen,
 	'/cart/:id': CartScreen,
 	'/product/:id': ProductScreen,
+	'/orders': OrdersScreen,
+	'/sign-in': LoginScreen,
+	'/sign-up': RegisterScreen,
 }
 
 /**
@@ -28,7 +33,7 @@ const router = async () => {
 		(request.id ? '/:id' : '') +
 		(request.verb ? `/${request.verb}` : '')
 
-	parseUrl == '/'
+	parseUrl !== '/checkout' 
 		? updateView(Header, 'header')
 		: updateView(CheckoutHeader, 'header')
 	const screen = routes[parseUrl] ? routes[parseUrl] : Error404Screen

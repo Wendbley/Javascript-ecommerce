@@ -44,8 +44,11 @@ const PaymentSummary = {
                                         total
                                     )}</div>
             </div>
+            <div class='paypal-toggle'>
+                    Use Pay Pal <input type="checkbox"  class='js-paypal-toggle' false>
+            </div>
 
-            <button class="place-order-button button-primary">
+            <button class="place-order-button button-primary ${total === 0 ? 'payment-buttons-disabled' : ''}" >
                 Place your order
             </button>
         `

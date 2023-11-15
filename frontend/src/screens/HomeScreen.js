@@ -1,5 +1,9 @@
-import { GetAllProducts } from '../api/api.js'
-import { getCartItems, setCartItems } from '../api/localStorage.js'
+import {
+	Products,
+	getAllProductsFromDatabase,
+	getCartItems,
+	setCartItems,
+} from '../api/localStorage.js'
 import Header from '../components/Header.js'
 import Product from '../components/Product.js'
 
@@ -34,9 +38,7 @@ const HomeScreen = {
 				addToCart(
 					{
 						id: btn.dataset.productId,
-						qty: parseInt(
-							document.getElementsByTagName('option')[qty].value
-						),
+						qty: parseInt(document.getElementsByTagName('option')[qty].value),
 					},
 					true
 				)
@@ -52,16 +54,15 @@ const HomeScreen = {
 		})
 	},
 	render: async () => {
-		const products = await GetAllProducts()
+		await getAllProductsFromDatabase()
 
-		if (!products) return `<div>Error fetching data</div>`
+		if (Products.length === 0)
+			return `<div class='empty-product'>No Products Available</div>`
 
 		return `<div class="products-grid js-products-grid">
-		${products
-			.map((product) => {
-				return Product.render(product)
-			})
-			.join('\n')}
+		${Products.map((product) => {
+			return Product.render({ id: product._id, ...product })
+		}).join('\n')}
 		</div>
 		`
 	},

@@ -227,3 +227,17 @@
   padding-block: 5px;
   width: 40px;
 }
+.payment-summary .payment-buttons-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.paypal-toggle{
+  display: flex;
+  align-items: center;
+  padding-block: 15px;
+}
+.paypal-toggle input{
+  width: 20px;
+  height: 20px;
+  margin-left: 20px;
+}
