@@ -8,8 +8,15 @@ import {
 import CheckoutHeader from '../components/Checkout-header.js'
 import PaymentSummary from '../components/Payment-Summary.js'
 import { formatCurrency } from '../scripts/utils/money.js'
-import { rerender, updateView } from '../utils/index.js'
+import { loadStyles, rerender, updateView } from '../utils/index.js'
 import CartScreen from './CartScreen.js'
+
+loadStyles([
+    '../styles/shared/general.css',
+    '../styles/pages/checkout/checkout-header.css',
+    '../styles/pages/checkout/checkout.css'
+])
+
 
 /**
  * Calculates the summary of the cart

@@ -7,6 +7,16 @@ import {
 import Header from '../components/Header.js'
 import Product from '../components/Product.js'
 
+import { loadStyles } from '../utils/index.js'
+
+
+loadStyles([
+    '../styles/shared/general.css',
+    '../styles/shared/amazon-header.css',
+    '../styles/pages/amazon.css'
+])
+
+
 /**
  * Stoes the cart items in local storage (id, quantity)
  * @param {*} item
@@ -26,6 +36,7 @@ function addToCart(item, forceUpdate = false) {
 		Header.after_render()
 	}
 }
+
 /**
  * Home Screen
  */
